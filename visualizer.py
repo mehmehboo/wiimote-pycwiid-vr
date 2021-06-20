@@ -3,7 +3,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-def visulizeWiimote(wm):
+def visualizeWiimote(wm):
     verticies = (
         (1.54, -1.81, -8),
         (1.54, 1.81, -8),
@@ -57,7 +57,7 @@ def visulizeWiimote(wm):
         glEnd()
 
 
-    def main():    
+    def main(wm):    
         pygame.init()
         display = (800,600)
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
@@ -88,9 +88,8 @@ def visulizeWiimote(wm):
             #roll glitches past 40 and -40
             #pitch glitches past 50 and -50
             #gimble lock causes this
-            if roll > 40 or roll < -40 or pitch > 50 or pitch < -50:
-                for i in range(100):
-                    wm.rumble = i
+            if roll > 40 or roll < -40 or pitch > 50 or pitch < -50: ##warning outside visulizer gimble lock
+                wm.rumble = True
 
             else:
                 wm.rumble = False
@@ -107,6 +106,4 @@ def visulizeWiimote(wm):
             pygame.display.flip()
             pygame.time.wait(10)
 
-
-    if wm != None:
-        main()
+    main(wm)

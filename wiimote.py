@@ -3,7 +3,7 @@ from time import sleep
 from subprocess import call
 from math import *
 
-def connectRemotes(amount):##untested
+def connectRemotes(amount):
     remotes = []
     for j in range(amount):
         DRIVE_A="gatttool -b 00:07:80:7F:28:E1 -i hci0 --char-write --handle=0x0025 --value=0102"
@@ -36,5 +36,7 @@ def connectRemotes(amount):##untested
         wm.led=0
         sleep(1.5)
         remotes.append(wm)
+
+        return wm
 
 
